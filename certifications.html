@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Certifications — Priya Dharshini S</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#ffffff;--bg2:#f3f4f8;--bg3:#eceffa;
+  --accent:#00bfff;--accent2:#8b5cf6;--accent3:#34d399;--cyan:#22d3ee;
+  --text:#111827;--muted:#6b7280;--border:rgba(0,0,0,0.08);--card:rgba(255,255,255,0.7);
+  --green:#16a34a;--amber:#f59e0b;--rose:#f43f5e;--accent-pink:#ff00ff;
+  --glow-primary:0 0 10px var(--accent),0 0 20px var(--accent),0 0 40px var(--accent);
+  --glow-accent:0 0 10px var(--accent2),0 0 30px var(--accent-pink),0 0 60px var(--accent-pink);
+  --font-display:'Syne',sans-serif;--font-body:'Space Grotesk',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+body.dark-mode{
+  --bg:#050505;--bg2:#0d1526;--bg3:#111e35;
+  --accent:#00ffff;--accent2:#8b5cf6;--accent3:#34d399;--cyan:#22d3ee;
+  --text:#ffffff;--muted:#9ca3af;--border:rgba(255,255,255,0.1);--card:rgba(20,20,20,0.8);
+  --accent-pink:#ff00ff;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;min-height:100vh;transition:background .4s ease,color .4s ease;}
+*{transition:background-color .35s ease,border-color .35s ease,box-shadow .35s ease,color .35s ease;}
+#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;
+  background:rgba(6,9,20,0.65);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);animation:slideDown .6s ease both;
+}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:none;opacity:1;}}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;font-weight:800;letter-spacing:.05em;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:1.8rem;}
+.nav-links a{
+  font-size:.82rem;font-weight:500;color:var(--muted);
+  text-decoration:none;letter-spacing:.08em;text-transform:uppercase;
+  transition:color .25s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a.active{color:var(--accent);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;flex-direction:column;
+  position:fixed;top:57px;left:0;right:0;z-index:99;
+  background:rgba(6,9,20,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(18px);
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  padding:1rem 1.5rem;font-size:.9rem;color:var(--muted);
+  text-decoration:none;border-bottom:1px solid var(--border);transition:color .2s,background .2s;
+}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent);background:rgba(79,142,247,.06);}
+
+/* ══ HERO BANNER ══ */
+.cert-hero{
+  position:relative;min-height:300px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:110px 5% 55px;text-align:center;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 65% 30%,rgba(167,139,250,.18) 0%,transparent 65%),
+    radial-gradient(ellipse at 25% 80%,rgba(79,142,247,.14) 0%,transparent 55%),
+    linear-gradient(180deg,#040816 0%,#080e22 100%);
+}
+.cert-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(167,139,250,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(167,139,250,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 14s linear infinite;pointer-events:none;
+}
+@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
+.cert-hero::after{
+  content:'';position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(167,139,250,.6),transparent);
+  animation:scanLine 5s ease-in-out infinite;pointer-events:none;
+}
+@keyframes scanLine{0%{top:0%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{top:100%;opacity:0;}}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;animation:orbFloat 7s ease-in-out infinite alternate;}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1);}100%{transform:translate(25px,18px) scale(1.1);}}
+.page-hero-title{
+  position:relative;z-index:2;
+  font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;
+  background:linear-gradient(135deg,#fff 30%,var(--accent2) 70%,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.6rem;
+}
+.page-hero-sub{
+  position:relative;z-index:2;font-family:var(--font-mono);font-size:.8rem;
+  color:var(--accent2);letter-spacing:.2em;margin-bottom:1rem;
+}
+.page-hero-line{
+  position:relative;z-index:2;width:60px;height:3px;
+  background:linear-gradient(90deg,var(--accent2),var(--cyan));border-radius:3px;margin:0 auto;
+}
+
+/* ══ MAIN SECTION ══ */
+.cert-section{
+  position:relative;padding:80px 5% 100px;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 85% 10%,rgba(167,139,250,.07) 0%,transparent 50%),
+    radial-gradient(ellipse at 10% 85%,rgba(79,142,247,.07) 0%,transparent 50%),
+    linear-gradient(180deg,#040816 0%,#050c1c 100%);
+}
+.cert-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(167,139,250,.08) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;z-index:0;
+}
+.cert-section::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--accent2),var(--cyan),var(--accent),transparent);
+  pointer-events:none;z-index:1;
+}
+.section-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2;}
+
+.section-header{text-align:center;margin-bottom:60px;}
+.section-tag{font-family:var(--font-mono);font-size:.75rem;color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;
+  background:linear-gradient(135deg,var(--text),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.8rem;
+}
+.section-line{width:60px;height:3px;background:linear-gradient(90deg,var(--accent2),var(--cyan));border-radius:3px;margin:0 auto;}
+
+/* ══ PROVIDER BLOCK ══ */
+.provider-block{
+  margin-bottom:60px;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.provider-block.visible{opacity:1;transform:none;}
+
+.provider-header{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:24px;padding:0 4px;
+}
+.provider-icon{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  border:1px solid rgba(167,139,250,.3);
+  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(79,142,247,.1));
+}
+.provider-name{
+  font-family:var(--font-display);font-size:1.3rem;font-weight:800;
+  color:var(--text);letter-spacing:.3px;
+}
+.provider-count{
+  font-family:var(--font-mono);font-size:.68rem;color:var(--muted);
+  letter-spacing:.1em;margin-top:2px;
+}
+.provider-line{flex:1;height:1px;background:linear-gradient(to right,rgba(167,139,250,.3),transparent);}
+
+/* ══ CERT CARDS GRID ══ */
+.cert-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:20px;
+}
+
+.cert-card{
+  background:rgba(13,21,38,.85);
+  border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;backdrop-filter:blur(14px);
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;
+  opacity:0;transform:translateY(20px) scale(.97);
+  transition:opacity .5s ease,transform .5s ease,border-color .3s,box-shadow .3s;
+}
+.cert-card.visible{opacity:1;transform:none;}
+.cert-card:hover{
+  transform:translateY(-6px) scale(1.01);
+  border-color:rgba(167,139,250,.4);
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 30px rgba(167,139,250,.1);
+}
+
+/* Holographic shimmer on hover */
+.cert-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255,255,255,.02) 30%,
+    rgba(167,139,250,.06) 50%,
+    rgba(255,255,255,.02) 70%,
+    transparent 100%
+  );
+  opacity:0;transition:opacity .3s;pointer-events:none;z-index:1;
+}
+.cert-card:hover::before{opacity:1;}
+
+.cert-card-bar{height:3px;}
+.bar-ai{background:linear-gradient(90deg,var(--accent2),var(--accent));}
+.bar-cyber{background:linear-gradient(90deg,var(--rose),var(--amber));}
+.bar-tech{background:linear-gradient(90deg,var(--accent3),var(--cyan));}
+
+.cert-card-body{padding:24px 22px 20px;position:relative;z-index:2;}
+
+/* Badge row */
+.cert-badge-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px;}
+.cert-icon-wrap{
+  width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);
+}
+.cert-year-badge{
+  font-family:var(--font-mono);font-size:.68rem;
+  padding:5px 12px;border-radius:50px;
+  background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.25);
+  color:var(--accent);letter-spacing:.05em;
+}
+
+/* Cert title */
+.cert-title{
+  font-family:var(--font-display);font-size:1rem;font-weight:800;
+  color:var(--text);letter-spacing:.3px;line-height:1.3;margin-bottom:10px;
+}
+
+/* Divider */
+.cert-divider{height:1px;background:linear-gradient(90deg,rgba(167,139,250,.2),transparent);margin:0 0 14px;}
+
+/* Cert description */
+.cert-desc{
+  font-size:.83rem;color:rgba(232,237,248,.7);line-height:1.7;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+/* Topics row */
+.cert-topics{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.topic-tag{
+  font-family:var(--font-mono);font-size:.62rem;
+  padding:4px 10px;border-radius:50px;
+  background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.15);
+  color:var(--cyan);letter-spacing:.05em;
+}
+
+/* Verified badge */
+.cert-verified{
+  display:flex;align-items:center;gap:6px;
+  margin-top:14px;padding:8px 12px;border-radius:8px;
+  background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.18);
+  font-family:var(--font-mono);font-size:.68rem;color:var(--green);letter-spacing:.05em;
+}
+.cert-verified::before{content:'✓';font-size:.8rem;}
+
+/* ══ HIGHLIGHTS SECTION ══ */
+.highlights-block{
+  margin-top:60px;padding:36px 40px;
+  background:rgba(13,21,38,.85);border:1px solid rgba(167,139,250,.2);
+  border-radius:20px;backdrop-filter:blur(14px);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.highlights-block.visible{opacity:1;transform:none;}
+.highlights-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent2),var(--cyan),var(--accent));
+}
+/* Decorative grid overlay */
+.highlights-block::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(167,139,250,.06) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;z-index:0;
+}
+.hl-inner{position:relative;z-index:1;}
+.hl-header{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.hl-icon{font-size:1.6rem;}
+.hl-title{font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);}
+.hl-sub{font-family:var(--font-mono);font-size:.68rem;color:var(--accent2);letter-spacing:.12em;margin-top:2px;}
+
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.hl-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:12px;
+  background:rgba(6,9,20,.5);border:1px solid rgba(167,139,250,.12);
+  transition:border-color .25s,background .25s,transform .25s;
+}
+.hl-item:hover{
+  border-color:rgba(167,139,250,.35);
+  background:rgba(167,139,250,.05);
+  transform:translateX(4px);
+}
+.hl-bullet{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;
+  background:linear-gradient(135deg,var(--accent2),var(--cyan));
+  box-shadow:0 0 8px rgba(167,139,250,.5);
+}
+.hl-text{font-size:.85rem;color:rgba(232,237,248,.8);line-height:1.5;}
+
+/* ══ STATS ROW ══ */
+.cert-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1rem;max-width:1100px;margin:60px auto 0;
+  position:relative;z-index:2;
+}
+.estat-card{
+  background:rgba(13,21,38,.8);border:1px solid var(--border);border-radius:12px;
+  padding:1.4rem;text-align:center;backdrop-filter:blur(12px);
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease,border-color .3s,box-shadow .3s;
+}
+.estat-card.visible{opacity:1;transform:none;}
+.estat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent2),var(--cyan));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.estat-card:hover::before{transform:scaleX(1);}
+.estat-card:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.35);box-shadow:0 16px 40px rgba(0,0,0,.3);}
+.estat-num{
+  font-family:var(--font-display);font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,var(--accent2),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.3rem;
+}
+.estat-label{font-size:.75rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:1.5rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted);position:relative;z-index:1;}
+footer span{color:var(--accent);}
+.back-top{
+  position:fixed;bottom:2rem;right:2rem;z-index:90;
+  width:42px;height:42px;background:var(--accent2);color:#fff;
+  border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;
+  opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;
+  box-shadow:0 4px 16px rgba(167,139,250,.4);
+}
+.back-top.visible{opacity:1;transform:none;}
+.back-top:hover{background:#9270e8;}
+
+/* ══ THEME TOGGLE BUTTON ══ */
+.theme-toggle{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--card);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;color:var(--text);
+  box-shadow:none;transition:box-shadow .3s,transform .3s;
+}
+.theme-toggle:hover{box-shadow:var(--glow-primary);transform:scale(1.08);}
+.theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+/* ══ NAV NEON GLOW ══ */
+nav{box-shadow:0 0 20px rgba(0,0,0,.05);}
+body.dark-mode nav{
+  box-shadow:0 0 10px var(--accent),0 0 20px var(--accent),0 0 40px rgba(0,255,255,.15);
+}
+
+/* ══ GLASS CARD ENHANCEMENTS ══ */
+.cert-card,.highlights-block,.estat-card{backdrop-filter:blur(15px);}
+.cert-card:hover{
+  box-shadow:0 20px 60px rgba(0,0,0,.2),0 0 10px var(--accent),0 0 30px var(--accent2);
+  border-color:var(--accent);
+}
+.estat-card:hover{
+  box-shadow:0 16px 40px rgba(0,0,0,.15),0 0 10px var(--accent2),0 0 30px var(--accent-pink);
+}
+.hl-item:hover{box-shadow:0 0 14px var(--accent);}
+
+/* ══ BACK TO TOP BUTTON — NEON GRADIENT ══ */
+.back-top{
+  background:linear-gradient(135deg,var(--accent),var(--accent2))!important;
+  color:#fff;border:none;
+  box-shadow:0 0 10px var(--accent),0 0 20px var(--accent2);
+}
+.back-top:hover{
+  box-shadow:0 0 10px var(--accent),0 0 30px var(--accent),0 0 60px var(--accent2);
+  transform:scale(1.1);
+}
+
+/* ══ FOCUS STATES (Accessibility) ══ */
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  nav{padding:.9rem 1.2rem;}.nav-links{display:none;}.hamburger{display:flex;}
+  .cert-section{padding:50px 1.2rem 70px;}
+  .highlights-block{padding:24px 18px;}
+  .cert-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="wrap">
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo">PD<span>.</span>S</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="education.html">Education</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Internship</a>
+    <a href="projects.html">Projects</a>
+    <a href="certifications.html" class="active">Certifications</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="education.html">Education</a>
+  <a href="skills.html">Skills</a>
+  <a href="experience.html">Internship</a>
+  <a href="projects.html">Projects</a>
+  <a href="certifications.html" class="active">Certifications</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ══ HERO BANNER ══ -->
+<div class="cert-hero">
+  <div class="hero-orb" style="width:400px;height:400px;background:rgba(167,139,250,.15);top:-80px;right:-60px;animation-delay:0s;"></div>
+  <div class="hero-orb" style="width:300px;height:300px;background:rgba(79,142,247,.12);bottom:-60px;left:-40px;animation-delay:-3.5s;"></div>
+  <div class="hero-orb" style="width:200px;height:200px;background:rgba(34,211,238,.08);top:30%;left:38%;animation-delay:-1.5s;"></div>
+  <h1 class="page-hero-title">Certifications</h1>
+  <p class="page-hero-sub">[ SKILLS &nbsp;·&nbsp; KNOWLEDGE &nbsp;·&nbsp; ACHIEVEMENTS ]</p>
+  <div class="page-hero-line"></div>
+</div>
+
+<!-- ══ CERTIFICATIONS SECTION ══ -->
+<section class="cert-section">
+  <div class="section-inner">
+
+    <div class="section-header provider-block">
+      <div class="section-tag">// certified_skills</div>
+      <h2 class="section-title">My Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- ── BLOCK 1: Infosys Springboard ── -->
+    <div class="provider-block">
+      <div class="provider-header">
+        <div class="provider-icon">🌱</div>
+        <div>
+          <div class="provider-name">Infosys Springboard</div>
+          <div class="provider-count">2 Certifications</div>
+        </div>
+        <div class="provider-line"></div>
+      </div>
+
+      <div class="cert-grid">
+
+        <!-- Cert 1: AI Primer -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-ai"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">🤖</div>
+              <span class="cert-year-badge">2026</span>
+            </div>
+            <div class="cert-title">Artificial Intelligence Primer</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Successfully completed the Artificial Intelligence Primer certification, gaining foundational knowledge of AI concepts, applications, problem-solving techniques, and real-world AI implementations.</p>
+            <div class="cert-topics">
+              <span class="topic-tag">AI Concepts</span>
+              <span class="topic-tag">Applications</span>
+              <span class="topic-tag">Problem Solving</span>
+              <span class="topic-tag">Real-world AI</span>
+            </div>
+            <div class="cert-verified">Certified — Infosys Springboard</div>
+          </div>
+        </div>
+
+        <!-- Cert 2: Generative AI -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-ai"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">✨</div>
+              <span class="cert-year-badge">2026</span>
+            </div>
+            <div class="cert-title">Principles of Generative AI</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Learned the fundamentals of Generative AI, including large language models, AI content generation, prompt engineering, and modern AI technologies used in industry.</p>
+            <div class="cert-topics">
+              <span class="topic-tag">LLMs</span>
+              <span class="topic-tag">Content Generation</span>
+              <span class="topic-tag">Prompt Engineering</span>
+              <span class="topic-tag">GenAI</span>
+            </div>
+            <div class="cert-verified">Certified — Infosys Springboard</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── BLOCK 2: Cyber Security ── -->
+    <div class="provider-block">
+      <div class="provider-header">
+        <div class="provider-icon">🛡️</div>
+        <div>
+          <div class="provider-name">Cyber Security</div>
+          <div class="provider-count">1 Certification</div>
+        </div>
+        <div class="provider-line"></div>
+      </div>
+
+      <div class="cert-grid">
+
+        <!-- Cert 3: Cyber Security Fundamentals -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-cyber"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">🔒</div>
+              <span class="cert-year-badge">Completed</span>
+            </div>
+            <div class="cert-title">Fundamentals of Cyber Security</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Acquired knowledge of cyber security principles, digital safety practices, network security fundamentals, cyber threats, and methods to protect systems and data from attacks.</p>
+            <div class="cert-topics">
+              <span class="topic-tag">Network Security</span>
+              <span class="topic-tag">Cyber Threats</span>
+              <span class="topic-tag">Digital Safety</span>
+              <span class="topic-tag">Data Protection</span>
+            </div>
+            <div class="cert-verified">Certified — Cyber Security</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── BLOCK 3: Essential Hacks ── -->
+    <div class="provider-block">
+      <div class="provider-header">
+        <div class="provider-icon">⚙️</div>
+        <div>
+          <div class="provider-name">Essential Hacks</div>
+          <div class="provider-count">3 Certifications</div>
+        </div>
+        <div class="provider-line"></div>
+      </div>
+
+      <div class="cert-grid">
+
+        <!-- Cert 4: Mobile Troubleshooting -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-tech"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">📱</div>
+              <span class="cert-year-badge">Completed</span>
+            </div>
+            <div class="cert-title">Mobile Troubleshooting</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Developed practical skills in diagnosing and resolving common mobile device issues, software problems, and basic maintenance techniques.</p>
+            <div class="cert-topics">
+              <span class="topic-tag">Diagnostics</span>
+              <span class="topic-tag">Software Fixes</span>
+              <span class="topic-tag">Maintenance</span>
+            </div>
+            <div class="cert-verified">Certified — Essential Hacks</div>
+          </div>
+        </div>
+
+        <!-- Cert 5: Laptop Troubleshooting -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-tech"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">💻</div>
+              <span class="cert-year-badge">Completed</span>
+            </div>
+            <div class="cert-title">Laptop Troubleshooting</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Learned hardware and software troubleshooting methods, system diagnostics, performance optimization, and maintenance procedures for laptops and computers.</p>
+            <div class="cert-topics">
+              <span class="topic-tag">Hardware</span>
+              <span class="topic-tag">System Diagnostics</span>
+              <span class="topic-tag">Optimization</span>
+            </div>
+            <div class="cert-verified">Certified — Essential Hacks</div>
+          </div>
+        </div>
+
+        <!-- Cert 6: Drone Technology -->
+        <div class="cert-card">
+          <div class="cert-card-bar bar-tech"></div>
+          <div class="cert-card-body">
+            <div class="cert-badge-row">
+              <div class="cert-icon-wrap">🚁</div>
+              <span class="cert-year-badge">Completed</span>
+            </div>
+            <div class="cert-title">Drone Technology</div>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">Gained introductory knowledge of drone systems, drone applications, flight operations, safety regulations, and emerging technologies in unmanned aerial vehicles (UAVs).</p>
+            <div class="cert-topics">
+              <span class="topic-tag">UAV Systems</span>
+              <span class="topic-tag">Flight Operations</span>
+              <span class="topic-tag">Safety Regulations</span>
+            </div>
+            <div class="cert-verified">Certified — Essential Hacks</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ HIGHLIGHTS BLOCK ══ -->
+    <div class="highlights-block">
+      <div class="hl-inner">
+        <div class="hl-header">
+          <span class="hl-icon">🏆</span>
+          <div>
+            <div class="hl-title">Certification Highlights</div>
+            <div class="hl-sub">// key_competencies_unlocked</div>
+          </div>
+        </div>
+        <div class="hl-grid">
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Artificial Intelligence Fundamentals</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Generative AI Concepts & Prompt Engineering</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Cyber Security Awareness</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Mobile & Laptop Troubleshooting</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Drone Technology Basics</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Problem Solving & Technical Skills</div></div>
+          <div class="hl-item"><div class="hl-bullet"></div><div class="hl-text">Continuous Learning & Professional Development</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ STATS ROW ══ -->
+    <div class="cert-stats">
+      <div class="estat-card">
+        <div class="estat-num">6</div>
+        <div class="estat-label">Total Certifications</div>
+      </div>
+      <div class="estat-card">
+        <div class="estat-num">3</div>
+        <div class="estat-label">Platforms</div>
+      </div>
+      <div class="estat-card">
+        <div class="estat-num">2</div>
+        <div class="estat-label">AI Certifications</div>
+      </div>
+      <div class="estat-card">
+        <div class="estat-num">7</div>
+        <div class="estat-label">Key Skills Gained</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>© 2026 <span>Priya Dharshini S</span> | Information Technology Portfolio</footer>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+/* 1. Particle canvas */
+(function(){
+  var canvas=document.getElementById('bgCanvas'),ctx=canvas.getContext('2d'),W,H,particles=[];
+  function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  function P(){
+    this.reset=function(){
+      this.x=Math.random()*W;this.y=Math.random()*H;
+      this.r=Math.random()*1.5+.5;
+      this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;
+      this.alpha=Math.random()*.4+.1;this.hue=Math.random()<.5?260:220;
+    };
+    this.reset();
+    this.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();};
+    this.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle='hsla('+this.hue+',80%,65%,'+this.alpha+')';ctx.fill();};
+  }
+  for(var i=0;i<120;i++)particles.push(new P());
+  function lines(){
+    var lim=110;
+    for(var a=0;a<particles.length;a++)for(var b=a+1;b<particles.length;b++){
+      var dx=particles[a].x-particles[b].x,dy=particles[a].y-particles[b].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<lim){ctx.beginPath();ctx.moveTo(particles[a].x,particles[a].y);ctx.lineTo(particles[b].x,particles[b].y);ctx.strokeStyle='rgba(167,139,250,'+((1-d/lim)*.1)+')';ctx.lineWidth=.5;ctx.stroke();}
+    }
+  }
+  (function loop(){ctx.clearRect(0,0,W,H);particles.forEach(function(p){p.update();p.draw();});lines();requestAnimationFrame(loop);})();
+})();
+
+/* 2. Mobile menu */
+document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});
+
+/* 2b. Theme toggle */
+(function(){
+  var btn=document.getElementById('themeToggle');
+  var saved=localStorage.getItem('theme');
+  if(saved==='dark') document.body.classList.add('dark-mode');
+  updateIcon();
+  btn.addEventListener('click',function(){
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme',document.body.classList.contains('dark-mode')?'dark':'light');
+    updateIcon();
+  });
+  function updateIcon(){btn.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';}
+})();
+
+/* 3. Scroll reveal with stagger */
+(function(){
+  /* Provider blocks */
+  var blocks=document.querySelectorAll('.provider-block, .highlights-block');
+  var obs1=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs1.unobserve(e.target);}});
+  },{threshold:.08});
+  blocks.forEach(function(el){obs1.observe(el);});
+
+  /* Cert cards — stagger within each grid */
+  var cards=document.querySelectorAll('.cert-card');
+  var obs2=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,idx){
+      if(e.isIntersecting){
+        var delay=idx*80;
+        setTimeout(function(){e.target.classList.add('visible');},delay);
+        obs2.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  cards.forEach(function(c){obs2.observe(c);});
+
+  /* Stats */
+  var stats=document.querySelectorAll('.estat-card');
+  var obs3=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,idx){
+      if(e.isIntersecting){
+        setTimeout(function(){e.target.classList.add('visible');},idx*100);
+        obs3.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  stats.forEach(function(s){obs3.observe(s);});
+})();
+
+/* 4. Back to top */
+(function(){
+  var btn=document.getElementById('backTop');
+  window.addEventListener('scroll',function(){btn.classList.toggle('visible',scrollY>300);});
+  btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body>
+</html>
